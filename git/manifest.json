@@ -1,0 +1,16 @@
+{
+"name":"attentication",
+"short_name":"login",
+"start_url":"/",
+"id":"/",
+"display":"standalone",
+"Orientation":"portrait_primary",
+"description":"Service worker display",
+"icons":[
+    {
+        "src":"rvce.png",
+        "type":"image/png",
+        "size":"512x512"
+    }
+]
+}

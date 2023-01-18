@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login Attentication</title>
+        <link rel="manifest" href="manifest.json"/>
+        <link rel="icon" type="image/x-icon" href="rvce.png" >
+    </head>
+    <body>
+        <h1>Login Page</h1>
+        <form id="form1">
+            <table>
+                <tr>
+                    <td>
+                        User Name :
+                    </td>
+                    <td>
+                        <input type="text" id="username"/>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Password :
+                    </td>
+                    <td>
+                        <input type="text" id="password"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" id="submit" value="Login"/>
+                    </td>
+                </tr>
+            </table>
+        </form>
+
+        <script>
+            localStorage.setItem("username","rvce");
+            localStorage.setItem("password","rvce");
+
+            if("serviceWorker" in navigator){
+                navigator.serviceWorker.register("sw1.js")
+                .then((e)=>{
+                    if(e.active===null){
+                        console.log("registered");
+                    }
+                });
+            }
+            else{
+                console.log("not registered");
+            }
+
+            const Login = (e)=>{
+                e.preventDefault();
+
+                var u = document.getElementById("username").value;
+                var p = document.getElementById("password").value;
+                var uv = localStorage.getItem("username");
+                var pv = localStorage.getItem("password");
+
+                if(u==uv && p==pv){
+                    alert("Login Success");
+                   
+                }
+                else {
+                    alert("Login faild");
+                    console.log(u);
+                    console.log(p);
+                    console.log(uv);
+                    console.log(pv);
+                }
+            }
+
+            document.getElementById("form1").addEventListener("submit",Login);
+
+        </script>
+    </body>
+</html>
