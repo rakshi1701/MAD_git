@@ -1,0 +1,65 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+
+    <div id="root">
+
+
+    </div>
+    
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("sw.js");
+      } else {
+        console.log("Browser does not support service worker");
+      }
+
+
+
+      const options = {
+        method: 'GET',
+        headers: {
+            'X-RapidAPI-Key': '0805462ad7mshd6547ada10e851fp1c3311jsn14fef1a117f5',
+            'X-RapidAPI-Host': 'covid-19-statistics.p.rapidapi.com'
+        }
+    };
+    
+    fetch('https://covid-19-statistics.p.rapidapi.com/reports?city_name=Autauga&region_province=Alabama&iso=USA&region_name=US&q=US%20Alabama&date=2020-04-16', options)
+        .then(response => response.json())
+        .then(response => {
+            var template=`
+            <table border="1">
+            <tr>
+            <th>Date</th>
+            <th>Active</th>
+            <th>Confirmed</th>
+            <th>Deaths</th>
+            </tr>
+            
+            `
+
+            template+=`
+            <tr>
+            <td>${response.data[0].date}</td>
+            <td>${response.data[0].active}</td>
+            <td>${response.data[0].confirmed}</td>
+             <td>${response.data[0].deaths}</td>
+            </tr>
+            `
+
+            template+=`</table>`
+
+            document.getElementById("root").innerHTML=template
+
+            console.log(response.data)
+        })
+        .catch(err => console.error(err));
+
+    </script>
+  </body>
+</html>
